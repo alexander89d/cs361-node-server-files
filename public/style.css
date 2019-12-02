@@ -1,0 +1,52 @@
+/*************************************************************
+**  Description:  main overall css styles
+*************************************************************/
+
+/* User dashboard */
+#foot-logo {
+    height: 70px;
+}
+
+#login-box {
+    width: 96%;
+    margin-top: 80px;
+    margin: auto;
+}
+
+#email {
+    width: 400px;
+}
+
+#password {
+    width: 400px;
+}
+
+#login-status {
+    margin-top: 20px;
+}
+
+#logout-button {
+
+}
+#user-history-chart {
+
+}
+#update-account-link {
+
+}
+
+/* User account update form */
+#recordForm {
+    width: 455px;
+    margin-top: 30px;
+    margin-left: 30px;
+    background-color: #d8e9e962;
+}
+
+#recordForm label, input {
+    margin: 2px;
+}
+
+#submit {
+    margin-top: 30px;
+}
