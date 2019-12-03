@@ -54,6 +54,19 @@ app.get('/user-account', function renderUserAccount(req, res) {
     res.render('user-account');
 });
 
+// Route not found
+app.use(function(req,res) {
+    res.status(404);
+    res.render('404');
+});
+   
+// Server error
+app.use(function(err, req, res, next) {
+    console.error(err.stack);
+    res.status(500);
+    res.render('500');
+});
+
 /* Listen on port and display message to indicate listening */
 app.listen(app.get('port'), function(){
     console.log('Express started at http://flip3.engr.oregonstate.edu:' + app.get('port') + '; press ctrl-C to terminate.');
