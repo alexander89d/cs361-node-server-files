@@ -25,26 +25,28 @@ app.set('port', process.argv[2]);
 
 /* Create route for simple get request to render the home page. */
 app.get('/', function renderHome(req, res) {
-    /* IDEA FOR NEXT MEETING: 
-     * Create string variable pageToRender, initialize to 'user-home'.
-     * Change pageToRender to 'user-account' if user does not exist.
-     * At end, render 'page-to-render.' */
-    
-    /* If the user does not exist in the database, redirect to user account page
-     * so that they can finish signing up for their account. */
-    /* mysql.pool.query("SELECT email FROM user_account_data WHERE email = ?", decodeURIComponent([req.query.uid]), function(err, rows, fields) {
+    /* See if user with email at end of query string exists in database. */
+    mysql.pool.query("SELECT email FROM user_account_data WHERE email = ?", decodeURIComponent([req.query.uid]), function(err, rows, fields) {
         if (err) {
            next(err);
            return;
         }
         
+        /* Initialize empty context array. */
+        var context = [];
+        
+        /* If the user does not exist in the database, render user-account page. */
         if (rows.length === 0) {
-            res.render('user-account');
+		    context.email = decodeURIComponent([req.query.uid]);
+            res.render("user-account", context);
         }
-    }); */
-    
-    /* If the user does exist in the database, render home page. */
-    res.render('user-home');
+	    
+        /* Otherwise, render user home page. */
+        else
+	    {
+		  res.render("user-home");
+	    }
+    });
 });
 
 /* Create route for get request for user account page. */

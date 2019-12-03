@@ -23,7 +23,7 @@
                 <input type="text" name="user-name" id="user-name-field" value="{{user.name}}"> <br>
         
                 <label for="user-email">Email</label>
-                <input type="text" name="user-email" id="user-email-field" value="{{user.email}}"> <br>
+                <input type="text" name="user-email" id="user-email-field" value="{{email}}" disabled> <br>
         
                 <label for="user-phone">Mobile Number</label>
                 <input type="text" name="user-phone" id="user-phone-field" value="{{user.mobile-number}}"> <br>
@@ -46,7 +46,8 @@
                 <input type="radio" name="alerts" value="0" id="alerts-no"><br>
         
                 <input type="hidden" name="user-email" value={{user.email}}>
-                <input type="submit" id="submit" value="Save Update">
+                <input type="submit" id="submit" value="Save" onclick="insertUser(document.getElementById('user-name').value, {{email}}, document.getElementById('user-phone').value, document.getElementById('user-date-field').value, document.getElementsByName('subscribe'), document.getElementesByName('alerts')">
+>
         
             </fieldset>
         </form>
@@ -56,3 +57,4 @@
         <button class="mdl-button mdl-js-button mdl-button--raised" id="logout-button" onclick="window.location.href = 'http://web.engr.oregonstate.edu/~wrighada/index.html';" >Log Out</button>
     </div>
 </div>
+<script src="user-account.js"></script>
