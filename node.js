@@ -32,16 +32,32 @@ app.get('/', function renderHome(req, res) {
     
     /* If the user does not exist in the database, redirect to user account page
      * so that they can finish signing up for their account. */
-    /* mysql.pool.query("SELECT email FROM user_account_data WHERE email = ?", decodeURIComponent([req.query.uid]), function(err, rows, fields) {
-        if (err) {
-           next(err);
-           return;
-        }
-        
-        if (rows.length === 0) {
-            res.render('user-account');
-        }
-    }); */
+    const email = decodeURIComponent([req.query.uid]);
+
+    //     mysql.pool.query("SELECT email FROM user_account_data WHERE email = ?", email, function(err, rows, fields) {
+    //         if (err) {
+    //         next(err);
+    //         return;
+    //         }
+            
+    //         if (rows.length === 0) {
+    //             let default_name = 'bob';
+    //             let default_mobile = '5555555';
+    //             let default_dob = '2000-01-01';
+
+    //             mysql.pool.query("INSERT INTO user_account_data (`email`, `name`, `mobile_number`, `date_of_birth`, `subscribe_to_newsletter`, `receive_mobile_alerts`) VALUES (?, ?, ?, ?, ?, ?)",
+    //                 [email, default_name,default_mobile , default_dob, 0, 0], function(err, res) {
+    //                 if (err) {
+    //                    next(err);
+    //                    return;
+    //                 }
+    //             });
+    //         res.render('user-account', {
+    //             rows: rows
+    //         });
+    //     }
+    // });
+
     
     /* If the user does exist in the database, render home page. */
     res.render('user-home');
@@ -50,6 +66,19 @@ app.get('/', function renderHome(req, res) {
 /* Create route for get request for user account page. */
 app.get('/user-account', function renderUserAccount(req, res) {
     res.render('user-account');
+});
+
+// Route not found
+app.use(function(req,res) {
+    res.status(404);
+    res.render('404');
+});
+   
+// Server error
+app.use(function(err, req, res, next) {
+    console.error(err.stack);
+    res.status(500);
+    res.render('500');
 });
 
 /* Listen on port and display message to indicate listening */
