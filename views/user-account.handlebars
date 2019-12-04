@@ -14,7 +14,7 @@
     <div class="mdl-card__supporting-text mdl-color-text--grey-600">
         <a href="http://flip3.engr.oregonstate.edu:7994/" id="user-home-link">Return to Dashboard</a>
         <br>
-        <form id="recordForm" action="http://flip3.engr.oregonstate.edu:7994/">
+        <form id="recordForm">
             <fieldset>
         
                 <legend>Account Details</legend>
@@ -44,11 +44,7 @@
         
                 <label for="alerts">No</label>
                 <input type="radio" name="alerts" value="0" id="alerts-no"><br>
-        
-                <input type="hidden" name="user-email" value={{user.email}}>
-                <input type="submit" id="submit" value="Save" onclick="insertUser(document.getElementById('user-name').value, {{email}}, document.getElementById('user-phone').value, document.getElementById('user-date-field').value, document.getElementsByName('subscribe'), document.getElementesByName('alerts')">
->
-        
+                <input type="submit" id="submit" value="Save" onclick="insertUser(document.getElementById('user-name-field').value, document.getElementById('user-email-field').value, document.getElementById('user-phone-field').value, document.getElementById('user-date-field').value, document.getElementsByName('subscribe'), document.getElementsByName('alerts'))">
             </fieldset>
         </form>
         <br>

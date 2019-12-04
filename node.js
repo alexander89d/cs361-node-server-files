@@ -49,18 +49,30 @@ app.get('/', function renderHome(req, res) {
     });
 });
 
+/* Create route to create new user in the database. */
+app.post('/add-user', function insertData(req, res, next) {
+    mysql.pool.query("INSERT INTO user_account_data (`email`, `name`, `mobile_number`, `date_of_birth`, `subscribe_to_newsletter`, `receive_mobile_alerts`) VALUES (?, ?, ?, ?, ?, ?)", [req.body.email, req.body.name, req.body.phone, req.body.birthday, req.body.subscribe, req.body.alerts], function(err, result) {
+        if (err) {
+            next(err);
+            return;
+        }
+        
+        res.end()
+    });
+});
+
 /* Create route for get request for user account page. */
 app.get('/user-account', function renderUserAccount(req, res) {
     res.render('user-account');
 });
 
-// Route not found
+/* Route not found */
 app.use(function(req,res) {
     res.status(404);
     res.render('404');
 });
    
-// Server error
+/* Server Error */
 app.use(function(err, req, res, next) {
     console.error(err.stack);
     res.status(500);
