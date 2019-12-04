@@ -12,7 +12,8 @@
         <h2 class="mdl-card__title-text">User Dashboard</h2>
     </div>
     <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-        <a href="http://flip3.engr.oregonstate.edu:7994/user-account" id="update-account-link">Update Account Details</a>
+        <p style="font-size: large; font-weight: bold;">Welcome, {{name}}!</p>
+        <a href="http://flip3.engr.oregonstate.edu:7994/update-account?uid={{{encodedEmail}}}" id="update-account-link">Update Account Details</a>
         <br>
         <img alt="bar chart" src="chart.png" id="user-history-chart">
         <br>

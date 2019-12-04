@@ -1,34 +1,27 @@
-/* Make sure the email field constains something that appears to be in the form of an email address once DOM content is loaded. Otherwise, redirect to login screen. */
-document.addEventListener("DOMContentLoaded", verifyEmailFormat);
-
-function verifyEmailFormat()
-{
-    var emailString = document.getElementById("user-email-field").value;
-    if (emailString.indexOf("@") === -1)
-    {
-        window.location.replace("http://flip3.engr.oregonstate.edu:7994/login-redirect");
-    }
-}
-
-/* Override default action of submit button. */
+/* Add event listener to prevent default action of "save" button. */
 document.getElementById("save").addEventListener("click", function(event) {
     event.preventDefault();
 });
 
+/* Add event listener to prevent default action of "Cancel" button. */
+document.getElementById("cancel").addEventListener("click", function(event) {
+    event.preventDefault();
+});
+
 /* Onclick function to process form data when user clicks "Save." */
-function insertUser(name, email, phone, birthday, subscribeArr, alertsArr) {
-    /* If user did not enter name, display error message and return. */
+function updateUser(name, email, phone, birthday, subscribeArr, alertsArr) {
+    /* If user deleted name and left field blank, display error message and return. */
     if (name === "") {
         alert("The name field cannot be left blank.");
         return;
     }
     
-    /* If user did not enter phone number, set to NULL. */
+    /* If user left phone field blank, set to NULL. */
     if (phone === "") {
         phone = null;
     }
     
-    /* If user did not enter birthday, display error message and return. */
+    /* If user left birthday field blank, display error message and return. */
     if (birthday === "") {
         alert("The birthday field cannot be left blank.");
         return;
@@ -59,7 +52,7 @@ function insertUser(name, email, phone, birthday, subscribeArr, alertsArr) {
     
     /* Make AJAX request to server to add data. */
     var req = new XMLHttpRequest();
-    req.open("POST", "http://flip3.engr.oregonstate.edu:7994/add-user", true);
+    req.open("POST", "http://flip3.engr.oregonstate.edu:7994/update-user", true);
     req.setRequestHeader("Content-Type", "application/json");
     
     var reqBody = {
@@ -85,4 +78,11 @@ function insertUser(name, email, phone, birthday, subscribeArr, alertsArr) {
     });
     
     req.send(reqBody);
+}
+
+/* Onclick function so that pressing "cancel" redirects to user dashboard with email appended to URL. */
+function cancelEdit(email)
+{
+    var homeAddr = "http://flip3.engr.oregonstate.edu:7994/?uid=" + encodeURIComponent(email);
+    window.location.replace(homeAddr);
 }
