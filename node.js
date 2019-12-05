@@ -64,7 +64,7 @@ app.post('/add-user', function insertData(req, res, next) {
 });
 
 /* Create route for get request to render update account page. */
-app.get('/update-account', function renderHome(req, res) {
+app.get('/update-account', function renderUpdateForm(req, res) {
     /* See if user with email at end of query string exists in database. */
     mysql.pool.query("SELECT email, name, mobile_number, date_of_birth, subscribe_to_newsletter, receive_mobile_alerts FROM user_account_data WHERE email = ?", decodeURIComponent([req.query.uid]), function(err, rows, fields) {
         if (err) {
@@ -111,7 +111,7 @@ app.post('/update-user', function updateData(req, res, next) {
 });
 
 /* Create route for serving login redirection page if script sends users here. */
-app.get('/login-redirect', function renderHome(req, res) {
+app.get('/login-redirect', function renderLogin(req, res) {
     res.render("login-redirect");
 });
 
